@@ -1,0 +1,2339 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DIA</title>
+<!-- Include jQuery Mobile stylesheets -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+
+<!-- Include the jQuery library -->
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- Include the jQuery Mobile library -->
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+<!-- Icon Font css -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--Font awesome-->
+<link href="css/font-awesome.min.css" rel="stylesheet">
+
+  <script src="js/jquery.touchSwipe.js"></script>
+  
+  <!-- Include the jQuery Datepicker -->
+  <link rel="stylesheet" href="css/jquery.mobile.datepicker.css" media="all">
+  <link rel="stylesheet" href="css/jquery.mobile.datepicker.theme.css" media="all">
+  <script src="js/datepicker.js"></script>
+  <script src="js/jquery.mobile.datepicker.js"></script>
+  
+ <!-- Include Custom Stylesheet-->
+<link rel="stylesheet" href="css/style.css" media="all">
+  
+  <script> 
+  $(function() {
+		//Menu
+		$("#menu").panel().enhanceWithin();		
+		// Date Picker
+		$( ".date-input-css" ).datepicker();
+		// Dragend
+		//new Dragend($("#demo").get(0), {
+        //afterInitialize: function() {
+        //$("#demo").css("visibility", "visible");
+        //}
+      	//}); 
+		
+		//Keep track of how many swipes
+			 var count=0;
+			 //Enable swiping...
+			 $(".swipe-show li").swipe( {
+			  //Single swipe handler for left swipes
+			  swipeRight:function(event, direction, distance, duration, fingerCount) {
+			   //$(this).text("You swiped " + direction + " " + ++count + " times " ); 
+			   $(this).addClass('open');
+			  },
+			  swipeLeft:function(event, direction, distance, duration, fingerCount) {
+			   //$(this).text("You swiped " + direction + " " + ++count + " times " ); 
+			   $(this).removeClass('open');
+			  },
+			  //Default is 75px, set to 0 for demo so any distance triggers swipe
+			  threshold:50
+			 });	
+	});
+	
+	// Set Panel height same as device height	
+	$(window).load(function(){
+		setTimeout(function (){
+			$('.back-arrow').click(function(){
+			$('.ui-panel').css({minHeight: $(document).height()});
+			});
+		}.bind(this),500);
+	});
+  </script>
+
+<script>
+$(function(){
+	//Menu
+		$("#menu").panel().enhanceWithin();	
+	// Set Panel height same as device height	
+	$(window).load(function(){
+		setTimeout(function (){
+			$('.back-arrow').click(function(){
+			$('.ui-panel').css({minHeight: $(document).height()});
+			});
+		}.bind(this),500);
+	});	
+});
+</script>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div data-role="page" id="login" class="login-page">
+    	<div data-role="main" class="ui-content"> 
+        	<div class="logo">
+            <img src="images/logo-insurance-wallet.png" alt="Insurance Wallet" title="Insurance Wallet" />
+            </div>
+            
+            <div class="form-container">
+            	<form action="" method="">
+                	<input type="email" placeholder="Username/Email" value="" />
+                    
+                    <input type="password" placeholder="Password" value="" />
+                    
+                    <button class="ui-btn ui-corner-all login-button" onClick="window.location.href='#dashboard'">Login</button>
+                    
+                    <p class="login-footer"><a href="#">Forgot password ?</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Login Screen -->
+
+
+<!-- Dashboard -->
+<div data-role="page" id="dashboard">
+    	<!-- Header -->
+    	<div data-role="header">
+           <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+           <h1>Dashboard</h1>
+           <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>
+				<div class="clearfix"></div>
+        </div>
+        <!-- Header -->        
+        <div data-role="main" class="ui-content">
+        	<ul class="icon-series">
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#my-profile"><img src="images/profile-icon.png" alt="My Profile" title="My Profile" /></a></span>
+                    </div>
+                    <a href="#my-profile">My Profile</a>
+                    </li>
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#my-policies"><img src="images/my-policies-icon.png" alt="My Policies" title="My Policies" /></a></span>
+                    </div>
+                    <a href="#my-policies">My Policies</a>
+                    </li>
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#claim"><img src="images/claims-icons.png" alt="Claims" title="Claims" /></a></span>
+                    <span class="notification-no" id="claim_notify_no">0</span>
+                    </div>
+                    <a href="#claim">Claims</a>
+                    </li>
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#support"><img src="images/my-documents.png" alt="My Documents" title="My Documents" /></a></span>
+                    </div>
+                    <a href="#support">My Documents</a>
+                    </li>
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#support"><img src="images/support-icon.png" alt="Products & Services" title="Products & Services" /></a>			                    </span>
+                    </div>
+                    <a href="#support">Support</a>
+                    </li>
+                    <li>
+                    <div class="rounded-circle">
+                    <span><a href="#products-services"><img src="images/product-services-icon.png" alt="Products & Services" title="Products & Services" /></a>
+                    </span>
+                    </div>
+                    <a href="#products-services">Products Services</a>
+                    </li>
+                    </ul>
+        </div>
+    </div>
+<!-- Dashboard -->
+
+
+<!-- My Profile -->
+<div data-role="page" id="my-profile"> 
+    <!-- Header -->
+		<div data-role="header">
+			 <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+			 <h1>My profile</h1>
+			 <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>          
+		</div>
+    <!-- Header -->
+    <!-- body -->
+    <div data-role="main" class="my-profile ui-content">
+    <form action="#" method="post">
+        <div class="form-set">
+        
+        <label>First Name</label>
+        <input name="" value="" type="text" placeholder="">
+        <label>last Name</label>
+        <input name="" value="" type="text" placeholder="">
+
+        
+        
+        <label>Phone number</label>
+        <input name="" value="" type="tel" placeholder="">
+        <label>Email</label>
+        <input name="" value="" type="email" placeholder="">
+        
+        <label>Home Street</label>
+        <input name="" value="" type="text" placeholder="">
+        <label>Home City</label>
+        <input name="" value="" type="text" placeholder="">
+        
+        
+        
+        <label>Home State</label>
+        <input name="" value="" type="text" placeholder="">
+       	<label>Home Zip Code</label>
+        <input name="" value="" type="text" placeholder="">
+        
+        <div>
+        <div class="inline"><button class="login-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+        <div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+        </div>
+        
+      </div>
+      </form>
+  </div>
+  </div>
+<!-- My Profile -->
+
+
+<!-- My Policies -->
+<div data-role="page" id="my-policies"> 
+    <!-- Header -->
+    	<div data-role="header">
+           <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+           <h1>My policies</h1>
+           <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>
+        </div>
+    <!-- Header -->
+    <!-- body -->
+    <div data-role="main" class="my-profile ui-content">
+
+		<a href="#my-policies-add" class="add-icon"><img src="images/plus-icon.png" alt="Add" title="Add"></a>
+
+
+		<div class="policy-search-sec">           
+			<form action="" method="">
+				<div>
+					<select name="select-native-5" id="select-native-5">
+						<option value="Carrier">Search by</option>
+						<option value="Plan Name">Plan Name</option>
+						<option value="Policy ID">Policy ID</option>
+						<option value="Status">Status</option>
+					</select>
+					</div>
+
+					<div>
+					<input name="" value="" type="text" placeholder="Search Text">
+					</div>
+
+					<div class="policy-btn-sec">
+						<a href="#" class="search-btn"><img src="images/refresh-icon.png" alt="Refresh" title="Refresh">Refresh</a>
+						<a href="#" class="search-btn"><img src="images/search-small-icon.png" alt="Search" title="Search">SEARCH</a>
+					</div>
+
+				<div class="clearfix"></div>
+			</form>
+		</div>
+
+		<div data-role="tabs" id="tabs">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#cmq-policies" data-ajax="false">CMQ Policies</a></li>
+					<li><a href="#additional-policies" data-ajax="false">Additional Policies</a></li>
+				</ul>
+			</div>
+			<div id="cmq-policies" class="ui-body-d ui-content">
+				<ul class="policies-listing">
+						<li>
+							<div class="polici-header-part new-item">
+								<h2 class="polici-heading">ID: #543</h2>
+								<div class="icons">
+									<a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop">
+									<img src="images/view-icon.png" alt="View">
+									</a>
+									<a href="#my-policy-edit"><img src="images/edit-icon.png" alt="Edit"></a>
+									<a href="#download"><img src="images/download-icon.png" alt="Download"></a>
+									<a href="#" class="ui-link"><img src="images/delete-icon.png" alt="Delete"></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+
+								<div class="wid-100">
+								<p><label>Policy type:</label> Medicare Supplement</p>
+								<p><label>Carrier:</label> AETNA</p>
+								<p><label>Plan name:</label> Test New From Frontend</p>
+								<p><label>Policy ID:</label> 1001NEWTESTID</p>
+								<p><label>Status:</label> Pending</p>
+								<p><label>EFF date:</label> 09-22-2016</p>
+								<p><label>Monthly premium:</label> $100.00</p>
+								</div>
+						</li>
+
+						<li>
+							<div class="polici-header-part">
+								<h2 class="polici-heading">ID: #543</h2>
+								<div class="icons">
+									<a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop">
+									<img src="images/view-icon.png" alt="View">
+									</a>
+									<a href="#my-policy-edit"><img src="images/edit-icon.png" alt="Edit"></a>
+									<a href="#download"><img src="images/download-icon.png" alt="Download"></a>
+									<a href="#" class="ui-link"><img src="images/delete-icon.png" alt="Delete"></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								<div class="wid-70">
+										
+								</div>
+								<div class="wid-100">
+								<p><label>Policy type:</label> Medicare Supplement</p>
+								<p><label>Carrier:</label> AETNA</p>
+								<p><label>Plan name:</label> Test New From Frontend</p>
+								<p><label>Policy ID:</label> 1001NEWTESTID</p>
+								<p><label>Status:</label> Pending</p>
+								<p><label>EFF date:</label> 09-22-2016</p>
+								<p><label>Monthly premium:</label> $100.00</p>
+								</div>
+						</li>
+						
+
+				</ul>
+			</div>
+			<div id="additional-policies" class="ui-body-d ui-content">
+				<ul class="policies-listing">
+            
+						<li>
+								<div class="polici-header-part">
+								<h2 class="polici-heading">ID: #543</h2>
+								<div class="icons">
+									<a href="#popupLogin" data-rel="popup" data-position-to="window" data-transition="pop">
+									<img src="images/view-icon.png" alt="View">
+									</a>
+									<a href="#my-policy-edit"><img src="images/edit-icon.png" alt="Edit"></a>
+									<a href="#download"><img src="images/download-icon.png" alt="Download"></a>
+									<a href="#" class="ui-link"><img src="images/delete-icon.png" alt="Delete"></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+								<div class="wid-100">
+								<p><label>Policy type:</label> Health - On Exchange</p>
+								<p><label>Carrier:</label> CIGNA</p>
+								<p><label>Plan name:</label> Medicare and Medicaid</p>
+								<p><label>Policy ID:</label> 123123</p>
+								 <p><label>Status:</label> Active</p>
+								<p><label>EFF date:</label> 10-01-2016</p>
+								<p><label>Monthly premium:</label> $30.00</p>
+								</div>
+						</li>
+
+				</ul>
+			</div>
+		</div>
+
+        
+        
+        
+<!-- My Policies modal -->
+<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+<div class="modal-doc-sec">
+<h5>Uploaded Docs List of Medicare and Medicaid</h5>
+
+<div class="center">                    
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/14/26b7d924-3a4b-0bb1-88d8-57ebc4a1290921475069354/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/17/35ce596e-6383-9883-f78c-57f608127689/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+</div>
+                        
+</div>
+</div>
+<!-- My Policies modal --> 
+      
+      
+      
+<!-- My Policies modal -->
+<div data-role="popup" id="popupLogin1" data-theme="a" class="ui-corner-all">
+<div class="modal-doc-sec">
+<h5>Uploaded Docs List of Medicare and Medicaid</h5>
+
+<div class="center">                    
+
+
+</div>
+                        
+</div>
+</div>
+<!-- My Policies modal -->      
+      
+        
+  </div>
+  </div>
+<!-- My Policies -->
+
+
+<!-- My Policy Add -->
+<div data-role="page" id="my-policies-add"> 
+ 
+<!-- Header -->
+<div data-role="header">
+ 
+<a href="#" data-rel="back" class="back-arrow back" ><img src="images/back-icon.png" alt="Back" title="Back"></a>
+
+<h1>My policy add</h1>      
+<a href="#dashboard" class="notification-link"><img src="images/home-icon.png" alt="Home" title="Home"></a>   
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="my-policy-add ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+            
+<div>
+<label for="policy_type">Policy type</label>
+<select name="policy_type" id="policy_type">
+<option selected="" value="">Select</option>
+<option value="health_on_exchange">Health - On Exchange</option>
+<option value="health_off_exchange">Health - Off Exchange</option>
+<option value="group_health">Group Health</option>
+<option value="medicare_supplement">Medicare Supplement</option>
+<option value="medicare_advantage">Medicare Advantage</option>
+<option value="stm">STM</option>
+<option value="life">Life</option>
+<option value="annuity">Annuity</option>
+<option value="vision">Vision</option>
+<option value="dental">Dental</option>
+<option value="ltc">LTC</option>
+<option value="gap">GAP</option>  
+</select> 
+</div>
+ 
+
+<div>
+<label>Coverage type</label>
+<select name="coverage_type" id="coverage_type" >
+<option value="individual">Individual</option>
+<option value="individual_spouse">Individual Spouse</option>
+<option value="individual_child">Individual Child</option>
+<option value="family">Family</option>  
+</select>
+</div>
+
+<div>
+<label>Carrier</label>
+<select name="insurance_company_c" id="insurance_company_c">
+<option>Select Carrier</option>
+</select>
+</div>
+
+<div>
+<label>Plan name</label>
+<input name="" value="" type="email" placeholder="" >
+</div>
+
+<div>
+                    <label for="neditclaim_agent_response">Agent Response:</label>
+                    <textarea cols="40" rows="8" name="textarea"  id="neditclaim_agent_response" readonly></textarea>
+                </div>
+
+<div>
+<label>Policy ID</label>
+<input name="" value="" type="tel" placeholder="">
+</div>
+
+<div>
+<label>State</label>
+<select name="state" id="state">
+<option value="Alabama">Alabama</option><option value="Alaska">Alaska</option><option value="Arizona">Arizona</option><option value="Arkansas">Arkansas</option><option value="California">California</option><option value="Colorado">Colorado</option><option value="Connecticut">Connecticut</option><option value="Delaware">Delaware</option><option value="Florida">Florida</option><option value="Georgia">Georgia</option><option value="Hawaii">Hawaii</option><option value="Idaho">Idaho</option><option value="Illinois">Illinois</option><option value="Indiana">Indiana</option><option value="Iowa">Iowa</option><option value="Kansas">Kansas</option><option value="Kentucky">Kentucky</option><option value="Louisiana">Louisiana</option><option value="Maine">Maine</option><option value="Maryland">Maryland</option><option value="Massachusetts">Massachusetts</option><option value="Michigan">Michigan</option><option value="Minnesota">Minnesota</option><option value="Mississippi">Mississippi</option><option value="Missouri">Missouri</option><option value="Montana">Montana</option><option value="Nebraska">Nebraska</option><option value="Nevada">Nevada</option>  
+</select>
+</div>
+
+<div>
+<label>Status</label>
+<select name="status" id="status" >
+<option value="active">Active</option>
+<option value="cancelled">Cancelled</option>
+<option value="termed">Termed</option>
+<option value="pending">Pending</option>  
+</select>
+</div>
+
+<div>
+<label>EFF date</label>
+<input type="text" name="" class="calendar date-input-css" value="" data-role="date" />
+</div>
+
+<div>
+<label>End date</label>
+<input type="text" name="" class="calendar date-input-css" value="" data-role="date" />
+</div>
+
+<div>
+<label>Monthly premium</label>
+<input name="" value="" type="email" placeholder="">
+</div>
+
+
+
+<div class="profile-form">
+<h4>Uploaded docs list</h4>
+
+<div>								
+<label class="control-label col-sm-1 text-left" for="aaa">Category:</label>
+<select name="policy_document_category_c[]" id="policy_document_category_c" title="">
+<option label="Policy ID" value="Policy ID">Policy ID</option>
+<option label="Policy Documents" value="Policy Documents" selected="selected">Policy Documents</option>
+<option label="Applications" value="Applications">Applications</option>
+<option label="Quotes/Proposals" value="Quotes/Proposals">Quotes/Proposals</option>
+<option label="Claims" value="Claims">Claims</option>
+<option label="Other" value="Other">Other</option>
+</select>
+</div>
+
+<div>									
+<label class="control-label col-sm-1 text-left" for="aaa">Document:</label>
+<input id="policy_upload_file_c_file" name="policy_upload_file_c_file[]" class="file" type="file">
+</div>
+
+<!--<div class="profile-form-btn-sec">
+<a href="#" class="search-btn ui-link"><i class="fa fa-times"></i></a>
+<a href="#my-policies-add" class="add-new-btn ui-link">Add New</a>
+</div>-->
+
+										
+</div>
+     
+<div data-role="footer" data-position="fixed">
+	<button class="footer-btn black-btn" onclick="window.location.href='#'"><img src="images/cancel-icon.png" alt="Cancel" title="Cancel">Cancel</button>
+	<button class="footer-btn save-btn" onclick="window.location.href='#'"><img src="images/save-icon.png" alt="Save" title="Save">Save</button>
+</div>     
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- My Policy Add --> 
+
+
+<!-- Add Medicare -->
+<div data-role="page" id="add-medicare"> 
+ 
+	<!-- Header -->
+	<div data-role="header">
+	<a href="#" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+
+	<h1>Add Medicare</h1>      
+	<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+	</div>
+	<!-- Header -->
+
+	<!-- body -->
+	<div data-role="main" class="my-policy-add ui-content">
+
+	<form action="#" method="post">
+
+	<div class="form-set">
+
+
+	<div>
+	<label>What Are You Interested in ?</label>
+	<input name="" value="" type="text" placeholder="">
+	</div>
+
+	<div>
+	<label>Notes</label>
+		<textarea rows="3" cols="5"></textarea>
+	</div>
+
+	<div>
+	<label>Description</label>
+		<textarea rows="3" cols="5"></textarea>
+	</div>
+
+
+	</div>
+
+	<div data-role="footer" data-position="fixed">
+		<button class="footer-btn black-btn" onclick="window.location.href='#'"><img src="images/cancel-icon.png" alt="Cancel" title="Cancel">Cancel</button>
+		<button class="footer-btn save-btn" onclick="window.location.href='#'"><img src="images/save-icon.png" alt="Save" title="Save">Save</button>
+	</div>     
+
+	</form>	
+	</div>
+</div> 
+<!-- Add Medicare--> 
+
+<!-- View: Medicare -->
+<div data-role="page" id="view-medicare"> 
+ 
+	<!-- Header -->
+	<div data-role="header">
+	<a href="#" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+
+	<h1>View: Medicare</h1>      
+	<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+	</div>
+	<!-- Header -->
+
+	<!-- body -->
+	<div data-role="main" class="my-policy-add ui-content">
+		<ul class="view-medicare-list">
+			<li>
+				<h2>Policy Type</h2>
+				gym
+			</li>
+			<li>
+				<h2>Note</h2>
+				test123
+			</li>
+			<li>
+				<h2>Description</h2>
+				test123
+			</li>
+		</ul>
+		
+	</div>
+</div> 
+<!-- View Medicare--> 
+
+
+<!-- My Policy Edit -->
+<div data-role="page" id="my-policy-edit"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#my-policies-add" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My policy edit</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="my-policy-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+            
+<div>
+<label for="policy_type">Policy type</label>
+<p>Medicare Supplement</p> 
+</div>
+ 
+
+<div>
+<label>Coverage type</label>
+<p>Individual Spouse</p>
+</div>
+
+<div>
+<label>Carrier</label>
+<p>AETNA</p>
+</div>
+
+<div>
+<label>Plan name</label>
+<p>Test New From Frontend</p>
+</div>
+
+<div>
+<label>Policy ID</label>
+<p>1001NEWTESTID</p>
+</div>
+
+<div>
+<label>State</label>
+<p>Indiana</p>
+</div>
+
+<div>
+<label>Status</label>
+<p>pending</p>
+</div>
+
+<div>
+<label>EFF date</label>
+<p>09-22-2016</p>
+</div>
+
+<div>
+<label>End date</label>
+<p>09-08-2016</p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$100.00</p>
+</div>
+
+
+
+<div class="profile-form">
+<h4>Uploaded docs list</h4>
+
+<div>								
+<label class="control-label col-sm-1 text-left" for="aaa">Category:</label>
+<select name="policy_document_category_c[]" id="policy_document_category_c" title="">
+<option label="Policy ID" value="Policy ID">Policy ID</option>
+<option label="Policy Documents" value="Policy Documents" selected="selected">Policy Documents</option>
+<option label="Applications" value="Applications">Applications</option>
+<option label="Quotes/Proposals" value="Quotes/Proposals">Quotes/Proposals</option>
+<option label="Claims" value="Claims">Claims</option>
+<option label="Other" value="Other">Other</option>
+</select>
+</div>
+
+<div>									
+<label class="control-label col-sm-1 text-left" for="aaa">Document:</label>
+<input id="policy_upload_file_c_file" name="policy_upload_file_c_file[]" class="file" type="file">
+</div>
+
+<div class="profile-form-btn-sec">
+<a href="#" class="search-btn ui-link"><i class="fa fa-times"></i></a>
+<a href="#my-policies-add" class="add-new-btn ui-link">Add New</a>
+</div>
+
+										
+</div>
+            
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+
+<div id="doc-sec">
+<h4>uploaded docs list</h4>
+
+<p id="" class="file-upload-text-2">
+		<span class="policy-doc-icon"><img src="images/my-policies-icon.png" alt="Doc"></span>
+        dsfgsgdsfgfd.jpg
+        <a href="#" class="ui-link download-doc"><img src="images/download-icon.png" alt="Download"></a>
+        <a href="#" class="ui-link delete-doc"><img src="images/delete-icon.png" alt="Delete"></a>
+    </p>
+
+<div class="center">                    
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/14/26b7d924-3a4b-0bb1-88d8-57ebc4a1290921475069354/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/17/35ce596e-6383-9883-f78c-57f608127689/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+</div>
+                        
+</div>
+
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- My Policy Edit --> 
+
+
+<!-- My support -->
+<div data-role="page" id="support"> 
+    <!-- Header -->
+    	<div data-role="header">
+           <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+           <h1>Support</h1>     
+        </div>
+    <!-- Header -->
+    <!-- body -->
+    <div data-role="main" class="my-profile ui-content">
+
+
+<div class="policy-search-sec">           
+<form action="" method="">
+
+    <div>
+    <label for="select-native-5">Search by</label>
+    <select name="select-native-5" id="select-native-5">
+    <option value="Carrier">Carrier</option>
+    <option value="Plan Name">Plan Name</option>
+    <option value="Policy ID">Policy ID</option>
+    <option value="Status">Status</option>
+    </select>
+    </div>
+    
+    <div>
+    <label>Search Text</label>
+    <input name="" value="" type="text" placeholder="">
+    </div>
+    
+    <div class="policy-btn-sec">
+    <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
+    <a href="#support-add" class="add-new-btn">Add New</a>
+    </div>
+    
+	<div class="clearfix"></div>
+</form>
+</div>
+
+
+<ul class="policies-listing">
+<li>
+    <div class="wid-70">
+        <div class="icons">
+            <a href="#support-edit"><i class="fa fa-pencil-square-o" alt="Edit" title="Edit"></i></a>
+            <a href="#"><i class="fa fa-close" alt="Delete" title="Delete"></i></a>
+            <a href="#support-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+        </div>
+    </div>
+    <div class="wid-100">
+    <p><label>Subject:</label> New Support Ticket</p>
+    <p><label>Priority:</label> High</p>
+    <p><label>Status:</label> New</p>
+    <p><label>Type:</label> Product</p>
+    </div>
+</li>
+
+<li>
+    <div class="wid-70">
+        <div class="icons">
+            <a href="#support-edit"><i class="fa fa-pencil-square-o" alt="Edit" title="Edit"></i></a>
+            <a href="#"><i class="fa fa-close" alt="Delete" title="Delete"></i></a>
+            <a href="#support-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+            <a href="#support-modal" data-rel="popup" data-position-to="window" data-transition="pop">
+            <i class="fa fa-download" alt="View" title="View"></i>
+            </a>
+        </div>
+    </div>
+    <div class="wid-100">
+    <p><label>Subject:</label> Window server</p>
+    <p><label>Priority:</label> Medium</p>
+    <p><label>Status:</label> Closed</p>
+    <p><label>Type:</label> Product</p>
+    </div>
+</li>
+
+<li>
+    <div class="wid-70">
+        <div class="icons">
+            <a href="#support-edit"><i class="fa fa-pencil-square-o" alt="Edit" title="Edit"></i></a>
+            <a href="#"><i class="fa fa-close" alt="Delete" title="Delete"></i></a>
+            <a href="#support-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+            <a href="#support-modal" data-rel="popup" data-position-to="window" data-transition="pop">
+            <i class="fa fa-download" alt="View" title="View"></i>
+            </a>
+        </div>
+    </div>
+    <div class="wid-100">
+    <p><label>Subject:</label> linux</p>
+    <p><label>Priority:</label> Medium</p>
+    <p><label>Status:</label> Closed</p>
+    <p><label>Type:</label> User</p>
+    </div>
+</li>
+    
+</ul>
+      
+      
+      
+<!-- My support-modal -->
+<div data-role="popup" id="support-modal" data-theme="a" class="ui-corner-all">
+<div class="modal-doc-sec">
+<h5>Uploaded Document List of linux</h5>
+
+<div class="center">                    
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/14/26b7d924-3a4b-0bb1-88d8-57ebc4a1290921475069354/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+<span>Download</span></a></p><a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/17" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/17/35ce596e-6383-9883-f78c-57f608127689/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+</div>
+                        
+</div>
+</div>
+<!-- My support-modal -->    
+      
+      
+        
+        
+  </div>
+  </div>
+<!-- My support -->
+
+  
+<!-- My Support add-->
+ <div data-role="page" id="support-add">
+<!-- Header -->
+<div data-role="header">
+   <a href="#support" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+   <h1>Create support ticket</h1>      
+   <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+<!-- body -->
+<div data-role="main" class="my-profile ui-content">
+<form action="#" method="post">
+<div class="form-set">
+
+<div>
+<label>Subject</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+    
+    
+
+<div>
+<label for="select-native-5">Priority</label>
+<select name="select-native-5" id="select-native-5">
+<option value="P1">High</option>
+<option value="P2">Medium</option>
+<option value="P3">Low</option>
+</select>
+</div>
+
+<div>
+<label>File</label>
+<input class="file" id="user_document_c_file" name="user_document_c_file" title="" size="30" maxlength="255" type="file">
+</div>
+
+
+<div>
+<label for="select-native-5">Type</label>
+<select name="select-native-5" id="select-native-5">
+<option value="Administration">Administration</option>
+<option value="Product">Product</option>
+<option value="User">User</option>
+</select>
+</div>
+
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+</div>
+</form>	
+</div>
+</div>
+<!-- My Support add -->
+
+<!-- My Support edit-->
+ <div data-role="page" id="support-edit">
+<!-- Header -->
+<div data-role="header">
+   <a href="#support" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+   <h1>My support Edit</h1>      
+   <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+<!-- body -->
+<div data-role="main" class="my-profile ui-content">
+<form action="#" method="post">
+<div class="form-set">
+
+<div>
+<label>Subject</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+    
+    
+
+<div>
+<label for="select-native-5">Priority</label>
+<select name="select-native-5" id="select-native-5">
+<option value="P1">High</option>
+<option value="P2">Medium</option>
+<option value="P3">Low</option>
+</select>
+</div>
+
+<div>
+<label>File</label>
+<input class="file" id="user_document_c_file" name="user_document_c_file" title="" size="30" maxlength="255" type="file">
+</div>
+
+
+<div>
+<label for="select-native-5">Type</label>
+<select name="select-native-5" id="select-native-5">
+<option value="Administration">Administration</option>
+<option value="Product">Product</option>
+<option value="User">User</option>
+</select>
+</div>
+
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+</div>
+</form>	
+</div>
+</div>
+<!-- My Support edit -->
+
+<!-- support view -->
+<div data-role="page" id="support-view"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#support" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Support View</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Subject:</label>
+<p>New Support Ticket </p> 
+</div>
+ 
+
+<div>
+<label>Type :</label>
+<p>Product </p>
+</div>
+
+<div>
+<label>Status:</label>
+<p>New </p>
+</div>
+
+<div>
+<label>User File:</label>
+<p> </p>
+</div>
+
+<div>
+<label>Priority:</label>
+<p>High</p>
+</div>
+
+<div>
+<label>Admin File:</label>
+<p> </p>
+</div>
+
+<div>
+<label>Description:</label>
+<p>Sample descriptiion </p>
+</div>
+
+<div>
+<label>Resolution:</label>
+<p>Resolution text 1. Resolution 2. </p>
+</div>
+
+
+</div>
+
+
+            
+<div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Back</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- support view -->
+
+
+
+
+
+
+
+
+<!-- My product and service -->
+<div data-role="page" id="shop-plan"> 
+    <!-- Header -->
+    	<div data-role="header">
+           <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+           <h1>Shop Plans</h1>     
+        </div>
+    <!-- Header -->
+    <!-- body -->
+    <div data-role="main" class="my-profile ui-content">
+
+
+
+<ul class="shop-plans">
+                    <li>
+                    <a href="#medicare-plan">
+                    <img src="images/medicare-icon.jpg" alt="Medicare" title="Medicare">
+                    <span>Medicare</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="individual-health-plan">
+                    <img src="images/individual-health-icon.jpg" alt="Individual Health" title="Individual Health">
+                    <span>Individual Health</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="insurance-plan">
+                    <img src="images/life-insurance-icon.jpg" alt="Life Insurance" title="Life Insurance">
+                    <span>Life Insurance</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="dental-vision-plan">
+                    <img src="images/dental-vision-icon.jpg" alt="Dental &amp; Vision" title="Dental &amp; Vision">
+                    <span>Dental &amp; Vision</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href="group-health-plan">
+                    <img src="images/group-health-icon.jpg" alt="Group Health" title="Group Health">
+                    <span>Group Health</span>
+                    </a>
+                    </li>
+           </ul>
+        
+            
+    </div>
+  <!--/body -->
+</div>
+<!-- /My product and service -->
+
+  
+  
+<!-- My product and service plan -->
+ <div data-role="page" id="medicare-plan">
+<!-- Header -->
+<div data-role="header">
+   <a href="#shop-plan" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+   <h1>My Plan (Medicare)</h1>      
+   <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+<!-- body -->
+<div data-role="main" class="my-profile ui-content">
+
+<div class="policy-search-sec">           
+<form action="" method="">
+
+    <div>
+    <label for="select-native-5">Search by</label>
+    <select name="select-native-5" id="select-native-5">
+    <option value="Carrier">Carrier</option>
+    <option value="Plan Name">Plan Name</option>
+    <option value="Policy ID">Policy ID</option>
+    <option value="Status">Status</option>
+    </select>
+    </div>
+    
+    <div>
+    <label>Search Text</label>
+    <input name="" value="" type="text" placeholder="">
+    </div>
+       
+    <div class="policy-btn-sec">
+    <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
+    <a href="#medicare-plan-add" class="add-new-btn">Add New</a>
+    </div>
+    
+	<div class="clearfix"></div>
+</form>
+</div>
+
+<ul class="policies-listing">
+<li>
+    <div class="wid-70">
+        <div class="icons">
+            <a href="#medicare-plan-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+        </div>
+    </div>
+    <div class="wid-100">
+    <p><label>What are you interested in?:</label> Medicare Insurance</p>
+    <p><label>Description:</label> Sample Medicare description</p>
+    <p><label>Note:</label> Medicare notes</p>
+    </div>
+</li>
+
+<li>
+    <div class="wid-70">
+        <div class="icons">
+            <a href="#medicare-plan-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+        </div>
+    </div>
+    <div class="wid-100">
+    <p><label>What are you interested in?:</label> Medicare interest 1</p>
+    <p><label>Description:</label> Sample Medicare description</p>
+    <p><label>Note:</label> Medicare notes</p>
+    </div>
+</li>
+
+    
+</ul>
+	
+</div>
+</div>
+<!-- /My product and service plan -->  
+  
+  
+  
+<!-- My product and service add -->
+ <div data-role="page" id="medicare-plan-add">
+<!-- Header -->
+<div data-role="header">
+   <a href="#shop-plan" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+   <h1>My Plan (Medicare) Add</h1>      
+   <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+<!-- body -->
+<div data-role="main" class="my-profile ui-content">
+
+
+<form action="#" method="post">
+<div class="form-set"> 
+
+<div>
+<label>What are you interested in?</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label for="textarea">Notes:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+<div>
+<label for="textarea">Description:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+</div>
+</form>
+	
+</div>
+</div>
+<!-- /My product and service add -->
+
+
+<!--My product and service view-->
+<div data-role="page" id="medicare-plan-view"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#medicare-plan" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Plan (Medicare) View</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">What are you interested in?:</label>
+<p>Medicare Insurance</p> 
+</div>
+ 
+
+<div>
+<label>Note:</label>
+<p>Medicare notes</p>
+</div>
+
+<div>
+<label>Description:</label>
+<p>Sample Medicare description</p>
+</div>
+
+</div>
+
+
+            
+<div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Back</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!--/My product and service view-->
+
+
+
+
+
+<!-- Menu -->
+<div data-role="panel" id="menu" data-position="left" data-display="overlay" data-transition="slidefade" data-theme="a" >
+        <!--Menu header-->
+        <div class="menu-header-container">
+        <h1>Richard Parker</h1>
+        <p>Gender: Male | Age: 35</p>
+        </div>
+        <!--/Menu header-->
+        
+        <ul class="main-menu">
+         <li><span><img src="images/dashboard-icon-menu.png" alt="Dashboard" title="Dashboard" width="24"></span>
+         <a href="#dashboard" class="ui-link active">Dashboard</a></li>
+         <li><span><img src="images/profile-icon.png" alt="My Profile"  title="My Profile" width="24"></span>
+         <a href="#my-profile" class="ui-link">My Profile</a></li>
+         <li><span><img src="images/my-policies-icon.png" alt="My Policies" title="My Policies" width="24"></span>
+         <a href="#my-policies" class="ui-link">My Policies</a></li>          
+         <li><span><img src="images/claims-icons.png" alt="Claims" title="Claims" width="24"></span>
+         <a href="#claim" class="ui-link">Claims</a></li>   
+         <li><span><img src="images/my-documents.png" alt="My Documents" title="My Documents" width="24"></span>
+         <a href="#claim" class="ui-link">My Documents</a></li>                  
+         <li><span><img src="images/support-icon.png" alt="Support" title="Support" width="24"></span>
+         <a href="#support" class="ui-link">Support</a></li>
+         <li><span><img src="images/product-services-icon.png" alt="Product & Services" title="Product & Services" width="24"></span>
+         <a href="#shop-plan" class="ui-link">Products & Services</a></li>         
+         <li><span><img src="images/logout-icon-menu.png" alt="Logout" title="Logout" width="24"></span>
+         <a href="#login" class="ui-link">Logout</a></li>
+        </ul>
+	</div>
+<!-- Menu -->
+
+
+<!-- My claims -->
+<div data-role="page" id="claim"> 
+    <!-- Header -->
+    	<div data-role="header">
+           <a href="#menu" class="back-arrow"><img src="images/menu-icon.png" alt="Menu" title="Menu"></a>
+           <h1>Claim</h1>
+           <a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>
+        </div>
+    <!-- Header -->
+    <!-- body -->
+    <div data-role="main" class="my-profile ui-content">
+    	
+        
+        <div class="policy-search-sec">           
+<form action="" method="">
+
+    <div>
+    <label for="select-native-5">Search by</label>
+    <select name="select-native-5" id="select-native-5">
+    <option value="Carrier">Carrier</option>
+    <option value="Plan Name">Plan Name</option>
+    <option value="Policy ID">Policy ID</option>
+    <option value="Status">Status</option>
+    </select>
+    </div>
+    
+    <div>
+    <label>Search Text</label>
+    <input name="" value="" type="text" placeholder="">
+    </div>
+    
+    <div class="policy-btn-sec">
+    <a href="#" class="search-btn"><i class="fa fa-search"></i></a>
+    <a href="#claim-add" class="add-new-btn">Add New</a>
+    </div>
+    
+	<div class="clearfix"></div>
+</form>
+</div>
+        
+        
+        
+        
+<ul class="policies-listing">
+                <li>
+                
+                <div class="wid-70">
+                        <div class="icons">
+                        <a href="#claim-edit"><i class="fa fa-pencil-square-o" alt="Edit" title="Edit"></i></a>
+                        <a href="#"><i class="fa fa-close" alt="Delete" title="Delete"></i></a>
+                        <a href="#claim-view"><i class="fa fa-eye" alt="View" title="View"></i></a>
+                        <a href="#claim-modal" data-rel="popup" data-position-to="window" data-transition="pop"><i class="fa fa-download" alt="View" title="View"></i></a>
+                        </div>
+                    </div>
+                
+                    <div class="wid-100">
+                    <p><label>Policy type:</label> Group Health</p>
+                    <p><label>Carrier:</label> CIGNA</p>
+                    <p><label>Plan name:</label> Public health care coverage</p>
+                    <p><label>Policy ID:</label> 321546</p>
+                    <p><label>Method Of Contact:</label> Phone</p>
+                    <p><label>Organization:</label> Shieldwatch</p>
+                    </div>
+                    
+                </li>
+                
+            </ul>
+            
+            
+<!-- My Policies modal -->
+<div data-role="popup" id="claim-modal" data-theme="a" class="ui-corner-all">
+<div class="modal-doc-sec">
+<h5>Uploaded Document List of Public health care coverage</h5>
+
+<div class="center"> 
+                   
+<div class="doc-box">
+<div class="doc-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+<p>company_logo_ha.jpg 
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+<span>Download</span></a>
+</p>
+
+<a href="http://cmacmq.codeuridea.net/customer/my_account/download_my_general_document/14" class="tabDetailViewDFLink">
+</a>
+
+<a href="#" data-href="http://cmacmq.codeuridea.net/customer/my_account/remove_policy_document/14/26b7d924-3a4b-0bb1-88d8-57ebc4a1290921475069354/26b7d924-3a4b-0bb1-88d8-57ebc4a12909" data-toggle="modal" data-target="#confirm-delete" class="delete-icon">X</a> 
+</div>
+
+
+</div>
+                        
+</div>
+</div>
+<!-- My Policies modal --> 
+            
+            
+  </div>
+  </div>
+<!-- My claims -->
+
+
+<!-- claim Add -->
+<div data-role="page" id="claim-add"> 
+ 
+<!-- Header -->
+<div data-role="header">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Add</h1>      
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-add ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+            
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+ 
+
+<div>
+<label>Method Of Contact:</label>
+<select name="preferred_method_of_contact_c" id="preferred_method_of_contact_c">
+<option selected="" value="">Select</option>
+<option value="email">Email</option>
+<option value="phone">Phone</option>
+<option value="both">Both</option>    
+</select>
+</div>
+
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+
+
+<div>
+<label>Associated Amount:</label>
+<div class="doller-icon">
+<input type="text" name="" value="" />
+</div>
+</div>
+
+
+<div>
+<label>Upload Bill:</label>
+<input class="file" name="" value="" type="file" placeholder="">
+</div>
+
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+           
+<div>
+<div class="inline"><button class="blue-btn" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Add --> 
+
+
+<!-- claim Add Medicare Supplement -->
+<div data-role="page" id="claim-edit-medicare"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Add (Medicare Supplement)</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Policy type</label>
+<p>Medicare Supplement </p> 
+</div>
+ 
+
+<div>
+<label>Coverage type :</label>
+<p>Individual Spouse </p>
+</div>
+
+<div>
+<label>Carrier :</label>
+<p>AETNA</p>
+</div>
+
+<div>
+<label>Plan name :</label>
+<p>Test New From Frontend</p>
+</div>
+
+<div>
+<label>Policy ID :</label>
+<p>1001NEWTESTID </p>
+</div>
+
+<div>
+<label>State :</label>
+<p>Indiana </p>
+</div>
+
+<div>
+<label>Status</label>
+<p>pending </p>
+</div>
+
+<div>
+<label>Effective date</label>
+<p>09-22-2016 </p>
+</div>
+
+<div>
+<label>End date</label>
+<p>09-08-2016 </p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$100.00 </p>
+</div>
+
+</div>
+
+
+
+<div> 
+<label for="policy_type">Method Of Contact:</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Associated Amount:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Upload Bill:</label>
+<input class="file" name="" value="" type="file" placeholder="">
+</div>
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+
+            
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Add Medicare Supplement -->
+
+
+<!-- claim Add Group Health -->
+<div data-role="page" id="claim-edit-grouphealth"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Add (Group Health)</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Policy type</label>
+<p>Group Health</p> 
+</div>
+ 
+
+<div>
+<label>Coverage type :</label>
+<p>Individual</p>
+</div>
+
+<div>
+<label>Carrier :</label>
+<p>CIGNA</p>
+</div>
+
+<div>
+<label>Plan name :</label>
+<p>Public health care coverage</p>
+</div>
+
+<div>
+<label>Policy ID :</label>
+<p>321546</p>
+</div>
+
+<div>
+<label>State :</label>
+<p>Alaska</p>
+</div>
+
+<div>
+<label>Status</label>
+<p>cancelled</p>
+</div>
+
+<div>
+<label>Effective date</label>
+<p>09-22-2016</p>
+</div>
+
+<div>
+<label>End date</label>
+<p>10-02-2016</p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$90.00</p>
+</div>
+
+</div>
+
+
+
+<div> 
+<label for="policy_type">Method Of Contact:</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Associated Amount:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Upload Bill:</label>
+<input class="file" name="" value="" type="file" placeholder="">
+</div>
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+
+            
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Add Group Health -->
+
+
+
+<!-- claim Edit -->
+<div data-role="page" id="claim-edit"> 
+ 
+<!-- Header -->
+<div data-role="header">
+<a href="#my-policies" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Edit</h1>      
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>   
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-add ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+            
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+ 
+
+<div>
+<label>Method Of Contact:</label>
+<select name="preferred_method_of_contact_c" id="preferred_method_of_contact_c">
+<option selected="" value="">Select</option>
+<option value="email">Email</option>
+<option value="phone">Phone</option>
+<option value="both">Both</option>    
+</select>
+</div>
+
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+
+
+<div>
+<label>Associated Amount:</label>
+<div class="doller-icon">
+<input type="text" name="" value="" />
+</div>
+</div>
+
+
+<div>
+<label>Upload Bill:</label>
+<input class="file" name="" value="" type="file" placeholder="">
+</div>
+
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+           
+<div>
+<div class="inline"><button class="blue-btn" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Edit -->
+
+
+<!-- claim Edit Medicare Supplement -->
+<div data-role="page" id="claim-edit-medicare"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Edit Medicare Supplement</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Policy type</label>
+<p>Medicare Supplement </p> 
+</div>
+ 
+
+<div>
+<label>Coverage type :</label>
+<p>Individual Spouse </p>
+</div>
+
+<div>
+<label>Carrier :</label>
+<p>AETNA</p>
+</div>
+
+<div>
+<label>Plan name :</label>
+<p>Test New From Frontend</p>
+</div>
+
+<div>
+<label>Policy ID :</label>
+<p>1001NEWTESTID </p>
+</div>
+
+<div>
+<label>State :</label>
+<p>Indiana </p>
+</div>
+
+<div>
+<label>Status</label>
+<p>pending </p>
+</div>
+
+<div>
+<label>Effective date</label>
+<p>09-22-2016 </p>
+</div>
+
+<div>
+<label>End date</label>
+<p>09-08-2016 </p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$100.00 </p>
+</div>
+
+</div>
+
+
+
+<div> 
+<label for="policy_type">Method Of Contact:</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Associated Amount:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Upload Bill:</label>
+<p><a href="#">company_logo_ha.jpg</a> <i class="fa fa-close"></i></p>
+</div>
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+
+            
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Edit Medicare Supplement -->
+
+
+<!-- claim Edit group health-->
+<div data-role="page" id="claim-edit-grouphealth"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim Edit Group Health</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+<div> 
+<label for="policy_type">Policy</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Policy type</label>
+<p>Group Health</p> 
+</div>
+ 
+
+<div>
+<label>Coverage type :</label>
+<p>Individual</p>
+</div>
+
+<div>
+<label>Carrier :</label>
+<p>CIGNA</p>
+</div>
+
+<div>
+<label>Plan name :</label>
+<p>Public health care coverage</p>
+</div>
+
+<div>
+<label>Policy ID :</label>
+<p>321546</p>
+</div>
+
+<div>
+<label>State :</label>
+<p>Alaska</p>
+</div>
+
+<div>
+<label>Status</label>
+<p>cancelled</p>
+</div>
+
+<div>
+<label>Effective date</label>
+<p>09-22-2016</p>
+</div>
+
+<div>
+<label>End date</label>
+<p>10-02-2016</p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$90.00</p>
+</div>
+
+</div>
+
+
+
+<div> 
+<label for="policy_type">Method Of Contact:</label>
+<select name="pol_md_policy_id_c" id="pol_md_policy_id_c" >
+<option value="">Select</option>
+<option value="">Medicare Supplement -&gt; Test New From Frontend</option>
+<option value="">Group Health -&gt; Public health care coverage</option>    
+</select> 
+</div>
+
+<div>
+<label>Organization Name:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Phone Number:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Associated Amount:</label>
+<input name="" value="" type="text" placeholder="">
+</div>
+
+<div>
+<label>Upload Bill:</label>
+<p><a href="#">company_logo_ha.jpg</a> <i class="fa fa-close"></i></p>
+</div>
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+</div>
+
+
+
+            
+<div>
+<div class="inline"><button class="blue-btn ui-btn ui-corner-all" onclick="window.location.href='#login'">Submit</button></div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Cancell</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim Edit group health-->
+
+
+<!-- claim view -->
+<div data-role="page" id="claim-view"> 
+ 
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+<a href="#claim" class="back-arrow back"><img src="images/back-icon.png" alt="Back" title="Back"></a>
+<h1>My Claim View</h1>  
+<a href="#notification" class="notification-link"><img src="images/bell-icon.png" alt="Bell" title="Bell"></a>       
+</div>
+<!-- Header -->
+
+<!-- body -->
+<div data-role="main" class="claim-edit ui-content">
+
+<form action="#" method="post">
+
+<div class="form-set">
+     
+
+
+<div class="view-sec">
+   
+<div>
+<label for="policy_type">Policy type</label>
+<p>Group Health</p> 
+</div>
+ 
+
+<div>
+<label>Coverage type :</label>
+<p>Individual</p>
+</div>
+
+<div>
+<label>Carrier :</label>
+<p>CIGNA</p>
+</div>
+
+<div>
+<label>Plan name :</label>
+<p>Public health care coverage</p>
+</div>
+
+<div>
+<label>Policy ID :</label>
+<p>321546</p>
+</div>
+
+<div>
+<label>State :</label>
+<p>Alaska</p>
+</div>
+
+<div>
+<label>Status</label>
+<p>cancelled</p>
+</div>
+
+<div>
+<label>Effective date</label>
+<p>09-22-2016</p>
+</div>
+
+<div>
+<label>End date</label>
+<p>10-02-2016</p>
+</div>
+
+<div>
+<label>Monthly premium</label>
+<p>$90.00</p>
+</div>
+
+</div>
+
+
+
+<div> 
+<label for="policy_type">Method Of Contact:</label>
+<p>Phone</p>
+</div>
+
+<div>
+<label>Organization Name:</label>
+<p>Shieldwatch</p>
+</div>
+
+<div>
+<label>Phone Number:</label>
+<p>1213456</p>
+</div>
+
+<div>
+<label>Associated Amount:</label>
+<p>1900.00</p>
+</div>
+
+<div>
+<label>Upload Bill:</label>
+<p><a href="#">company_logo_ha.jpg</a> <i class="fa fa-close"></i></p>
+</div>
+
+<div>
+<label for="textarea">Description of Claim:</label>
+<p>test</p>
+</div>
+
+
+
+            
+<div>
+<div class="inline"><button class="cancell-button ui-btn ui-corner-all" onclick="window.location.href='#login'">Back</button></div>
+</div>
+
+
+</div>
+</form>	
+</div>
+</div> 
+<!-- claim view -->
+
+
+
+
+</body>
+</html>
